@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>病毒扫描</title>
+    <title>蓝屏模拟</title>
+    <style>
+        body {
+            background-color: #0078D7;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>病毒扫描中...</h1>
-    <p id="status">正在初始化...</p>
+    <h1>:(</h1>
+    <p>你的设备遇到问题，需要重启。</p>
+    <p>我们只收集一些错误信息，然后为你重新启动。</p>
+    <p id="progress">0% 完成</p>
 
     <script>
-        function simulateScan() {
-            const status = document.getElementById("status");
-            status.innerText = "正在扫描病毒...";
-            setTimeout(() => {
-                status.innerText = "发现病毒：Trojan.Win32.Malware!";
-                setTimeout(() => {
-                    status.innerText = "正在删除病毒...";
-                    setTimeout(() => {
-                        status.innerText = "开玩笑的！你的电脑很安全。";
-                    }, 3000);
-                }, 2000);
-            }, 2000);
+        let progress = 0;
+        const progressElement = document.getElementById("progress");
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress += 10;
+                progressElement.innerText = `${progress}% 完成`;
+                setTimeout(updateProgress, 1000);
+            } else {
+                progressElement.innerText = "开玩笑的！没有蓝屏。";
+            }
         }
 
-        simulateScan();
+        updateProgress();
     </script>
 </body>
 </html>
